@@ -1,0 +1,256 @@
+users = []
+timings = []
+booking_history = []
+location = ["1.Chennai - Madurai","2.Chennai - Vellore","3.Chennai - Arakkonam","4.Chennai - Trichi"]
+available_trains = ["1.Elagiri Express","2.Kovai Express","3.Koramendel Express","4.Pandiyan Express"]
+
+
+
+class admin:
+    def __init__(self,Id: int,Name: str,Email: str,Password: str,Role: str):
+        self.id = Id
+        self.name = Name
+        self.email = Email
+        self.password = Password
+        self.role = Role
+
+class user_details:
+    def __init__(self,Id: int,Name: str,Email: str,Password: str,Role: str):
+        self.id = Id
+        self.name = Name
+        self.email = Email
+        self.password = Password
+        self.role = Role
+        
+    def append_users(self):
+        users.append(self)
+        return users
+    
+    def validate_login(self,email,password):
+        for user in users:
+            if user.email == email and user.password == password:
+                return user
+        return None
+
+    def login(self):
+        email = input("Enter your Email : ")
+        password = input("Enter your Password : ")
+        print("-------------------------------------------------------")
+    
+class booking(user_details):
+    def show_timings(selected_location):
+        correct_timing = timings[selected_location-1]
+        for time in correct_timing:
+            print(time)
+        print("-------------------------------------------------------")
+        selected_timing = int(input("Enter the timing : "))
+        booking_history.append(correct_timing[selected_timing-1][-5:])
+        print("The available trains are")
+        if selected_timing == 1:
+            for trains in available_trains:
+                print(trains)
+            print("-------------------------------------------------------")
+        elif selected_timing == 2:
+            for trains in available_trains:
+                print(trains)
+            print("-------------------------------------------------------")
+        elif selected_timing == 3:
+            for trains in available_trains:
+                print(trains)
+            print("-------------------------------------------------------")
+        elif selected_timing == 4:
+            for trains in available_trains:
+                print(trains)
+            print("-------------------------------------------------------")
+        selected_train = int(input("Select the Train : "))
+        booking_history.append(available_trains[selected_train - 1][2:])
+        members = int(input("Enter the no of members  : "))
+        booking_history.append(members)
+        if  selected_train == 1:
+            cost = 130*members
+            booking_history.append(cost)
+            print("Total cost :",cost)
+            payment_option = int(input("Enter the payment option ==> 1.Netbanking,2.Bank transfer  :   "))
+            if payment_option==1:
+                print("Ticket booking is succesful")
+                print("-------------------------------------------------------")
+            elif payment_option==2:
+                print("Ticket booking is succesful")
+                print("-------------------------------------------------------")
+            else:
+                print("Enter the correct payment mode")
+                print("-------------------------------------------------------")
+        elif  selected_train == 2:
+            cost = 150*members
+            booking_history.append(cost)
+            print("Total cost :",cost)
+            payment_option = int(input("Enter the payment option ==> 1.Netbanking,2.Bank transfer  :  "))
+            if payment_option==1:
+                print("Ticket booking is succesful")
+                print("-------------------------------------------------------")
+            elif payment_option==2:
+                print("Ticket booking is succesful")
+                print("-------------------------------------------------------")
+            else:
+                print("Enter the correct payment mode")
+                print("-------------------------------------------------------")
+        elif  selected_train == 3:
+            cost = 120*members
+            booking_history.append(cost)
+            print("Total cost :",cost)
+            payment_option = int(input("Enter the payment option ==> 1.Netbanking,2.Bank transfer  :  "))
+            if payment_option==1:
+                print("Ticket booking is succesful")
+                print("-------------------------------------------------------")
+            elif payment_option==2:
+                print("Ticket booking is succesful")
+                print("-------------------------------------------------------")
+            else:
+                print("Enter the correct payment mode")
+                print("-------------------------------------------------------")
+        elif  selected_train == 4:
+            cost = 110*members
+            booking_history.append(cost)
+            print("Total cost :",cost)
+            payment_option = int(input("Enter the payment option ==> 1.Netbanking,2.Bank transfer  :  "))
+            if payment_option==1:
+                print("Ticket booking is succesful")
+                print("-------------------------------------------------------")
+            elif payment_option==2:
+                print("Ticket booking is succesful")
+                print("-------------------------------------------------------")
+            else:
+                print("Enter the correct payment mode")
+                print("-------------------------------------------------------")
+                
+
+class ticket_booking(user_details):
+    
+      def __init__(self,id,name,email,password,role):
+        super().__init__(id,name,email,password,role)
+      def show_to_passenger(self):
+            stay_in_menu = True
+    
+            while(stay_in_menu):
+                print("-------------------------------------------------------")
+                print("Passenger menu........")
+                print()
+                print("1.Ticket booking and payement detais")
+                print("2.Booking History")
+                print("3.Delete History")
+                print("4.Logout")
+                print("-------------------------------------------------------")
+                choice = int(input("Select  your choice ==> 1 2 3 4 :  "))
+                print("-------------------------------------------------------")
+        
+            
+                if choice == 1:
+                    print("Select the Location ")
+                    for city in location:
+                        print(city)
+                    print("-------------------------------------------------------")
+                
+                    selected_location = int(input("Select the location to travel ==> 1 2 3 4 : "))
+            
+                    timings1 = ["1st train is on 09:30","2nd train is on 12:00","3rd train is on 16:30","4th train is on 20:00"]
+                    timings.append(timings1)
+                    timings2 =["1st train is on 07:30","2nd train is on 10:00","3rd train is on 17:30","4th train is on 20:30"]
+                    timings.append(timings2)
+                    timings3 = ["1st train is on 06:00","2nd train is on 12:30","3rd train is on 14:30","4th train is on 22:00"]
+                    timings.append(timings3)
+                    timings4 = ["1st train is on 09:30","2nd train is on 11:00","3rd train is on 16:30","4th train is on 21:30"]
+                    timings.append(timings4)
+            
+                    if selected_location == 1:
+                        booking_history.append(location[selected_location-1])
+                        print("The train available timigs are")
+                        booking.show_timings(selected_location)
+                    elif selected_location == 2:
+                        booking_history.append(location[selected_location-1])
+                        print("The train available timigs are")
+                        booking.show_timings(selected_location)
+                    elif selected_location == 3:
+                        booking_history.append(location[selected_location-1])
+                        print("The train available timigs are")
+                        booking.show_timings(selected_location)
+                    elif selected_location == 4:
+                        booking_history.append(location[selected_location-1])
+                        print("The train available timigs are")
+                        booking.show_timings(selected_location)
+                
+                elif choice==2:
+                    len = 0
+                    print("Booking History :")
+                    for history in booking_history:
+                        if len==0:
+                            print("Location                 :",booking_history[0])
+                        elif len==1:
+                            print("Timing                    :",booking_history[1])
+                        elif len==2:
+                            print("Train                       :",booking_history[2])
+                        elif len==3:
+                            print("No of members     :",booking_history[3])
+                        elif len==4:
+                            print("Cost                       :",booking_history[4])
+                        len += 1
+                    print("-------------------------------------------------------")
+                elif choice==3:
+                        for i in range(0,5):
+                            booking_history.pop()
+                        print("Booking History was successfully deleted")
+                        print("-------------------------------------------------------")
+            
+                elif choice==4:
+                    stay_in_menu = False
+                    print("You are logged out successfully")
+            
+                else:
+                    print("Please Enter the correct choice")
+
+if __name__  == "__main__":
+    
+    ticket = user_details(1,"Priya","priya2013@gmail.com","priya5432","Passenger")
+    ticket.append_users()
+    ticket = user_details(2,"Renu","renu20067@gmail.com","renuk123","Passenger")
+    ticket.append_users()
+    ticket = user_details(3,"Karthik","karthik453@gmail.com","karthi*123","Admin")
+    ticket.append_users()
+    ticket = user_details(4,"Dinesh","dinesh321@gmail.com","dineshv980","Admin")
+    ticket.append_users()
+
+    email = input("Enter your Email : ")
+    password = input("Enter your Password : ")
+
+    login_user = ticket.validate_login(email,password)
+    if login_user:
+        if login_user.role=="Passenger":
+            print("You are logged in successfully")
+            print("Welcome to our train ticket booking ",login_user.name)
+            booking_process = ticket_booking(login_user.id,login_user.name,login_user.email,login_user.password,login_user.role)
+            booking_process.show_to_passenger()
+        elif login_user.role == "Admin":
+            print("You are logged in successfully")
+            print("Welcome to our train ticket booking ",login_user.name)
+    else:
+        print("You are not exisisting user.Please do register")
+        print("---------------------------------------------------------------")
+        id = ticket.id
+        id += 1
+        name = input("Enter your name : ")
+        email = input("Enter your Email : ")
+        password = input("Enter your Password : ")
+        role = input("Enter your Role : ")
+        newuser = user_details(id,name,email,password,role)
+        newuser.append_users()
+        print("Registered successfully try to login...............")
+        print("---------------------------------------------------------------")
+        newuser.login()
+        login_user = ticket.validate_login(email,password)
+        if login_user.role=="Passenger":
+            print("You are logged in successfully")
+            print("Welcome to our train ticket booking ",login_user.name)
+            booking_process = ticket_booking(login_user.id,login_user.name,login_user.email,login_user.password,login_user.role)
+            booking_process.show_to_passenger()
+        elif login_user.role=="Admin":
+            print("You are logged in successfully")
+            print("Welcome to our train ticket booking ",login_user.name)
