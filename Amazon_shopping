@@ -1,0 +1,125 @@
+import mysql.connector
+mydb=mysql.connector.connect(host="localhost",user="root",password="Bakiya*123",database="amazon_shopping")
+mycursor=mydb.cursor()
+
+def show_menu_order():
+    print("All Categories..........\n")
+    print("1.Groceries")
+    print("2.Fashion")
+    print("3.Electronics")
+    print("-----------------------------------------------")
+    print("Are you want to Order? please select the option which one you want to buy")
+    option = int(input("Enter your Option : "))
+    total_cost = 0
+    if option==1:
+        mycursor.execute("select * from groceries")
+        data = mycursor.fetchall()
+        print("..................................................................")
+        print(data)
+        product_choice = int(input("Enter your choice : "))
+        print("..................................................................")
+        if product_choice==1:
+            count = int(input("Enter how many you want to buy : "))
+            total_cost += (count * data[product_choice-2][2])
+            mycursor.execute("insert into order_details values(null,%s,%s,%s)",(data[product_choice-2][1],count,total_cost,))
+            mydb.commit()
+        elif product_choice==2:
+            count = int(input("Enter how many you want to buy : "))
+            total_cost += (count * data[product_choice-2][2])
+            mycursor.execute("insert into order_details values(null,%s,%s,%s)",(data[product_choice-2][1],count,total_cost,))
+            mydb.commit()
+        elif product_choice==3:
+            count = int(input("Enter how many you want to buy : "))
+            total_cost += (count * data[product_choice-2][2])
+            mycursor.execute("insert into order_details values(null,%s,%s,%s)",(data[product_choice-2][1],count,total_cost,))
+            mydb.commit()
+        else:
+            print("Invalid Option.......")
+    elif option==2:
+        mycursor.execute("select * from fashion")
+        data = mycursor.fetchall()
+        print("..................................................................")
+        print(data)
+        product_choice = int(input("Enter your choice : "))
+        print("..................................................................")
+        if product_choice==1:
+            count = int(input("Enter how many you want to buy : "))
+            total_cost += (count * data[product_choice-1][2])
+            mycursor.execute("insert into order_details values(null,%s,%s,%s)",(data[product_choice-1][1],count,total_cost,))
+            mydb.commit()
+        elif product_choice==2:
+            count = int(input("Enter how many you want to buy : "))
+            total_cost += (count * data[product_choice-1][2])
+            mycursor.execute("insert into order_details values(null,%s,%s,%s)",(data[product_choice-1][1],count,total_cost,))
+            mydb.commit()
+        elif product_choice==3:
+            count = int(input("Enter how many you want to buy : "))
+            total_cost += (count * data[product_choice-1][2])
+            mycursor.execute("insert into order_details values(null,%s,%s,%s)",(data[product_choice-1][1],count,total_cost,))
+            mydb.commit()
+        else:
+            print("Invalid Option.......")
+    elif option==3:
+        mycursor.execute("select * from Electronics")
+        data = mycursor.fetchall()
+        print("..................................................................")
+        print(data)
+        product_choice = int(input("Enter your choice : "))
+        print("..................................................................")
+        if product_choice==1:
+            count = int(input("Enter how many you want to buy : "))
+            total_cost += (count * data[product_choice-1][2])
+            mycursor.execute("insert into order_details values(null,%s,%s,%s)",(data[product_choice-1][1],count,total_cost,))
+            mydb.commit()
+        elif product_choice==2:
+            count = int(input("Enter how many you want to buy : "))
+            total_cost += (count * data[product_choice-1][2])
+            mycursor.execute("insert into order_details values(null,%s,%s,%s)",(data[product_choice-1][1],count,total_cost,))
+            mydb.commit()
+        elif product_choice==3:
+            count = int(input("Enter how many you want to buy : "))
+            total_cost += (count * data[product_choice-1][2])
+            mycursor.execute("insert into order_details values(null,%s,%s,%s)",(data[product_choice-1][1],count,total_cost,))
+            mydb.commit()
+        else:
+            print("Invalid Option.......")
+    else:
+        print("Invalid Option.......")
+        
+    
+    return total_cost
+
+def order_details():
+    mycursor.execute("select * from order_details")
+    data = mycursor.fetchall()
+    print("YOUR ORDER DETAILS SHOWN BELOW.............\n")
+    print(data)
+    return 1
+
+print("Welcome to AMAZON SHOPPING!!")
+print("Are you a New user or Exisiting user ?" + '\n' +"1.Exisiting user 2. New user")
+print("-------------------------------------------------------------")
+entry_choice = int(input("Enter your choice : "))
+print("---------------------------------------------------------")
+if entry_choice == 1:
+    print("1.Product menu & Order")
+    print("2..Order Details")
+    choice = int(input("Enter Your Choice : "))
+    print("---------------------------------------------------------------")
+    if choice==1:
+        cost = show_menu_order()
+        print("Your Order is Placed Successfully" + "\n" + "Total cost is = ",cost)
+    elif choice==2:
+        order_details()
+    
+if entry_choice == 2:
+    name = input("Enter your name : ")
+    phone = input("Enter your contact no : ")
+    location = input("Enter your location : ")
+    print("---------------------------------------------------------------------\n")
+    mycursor.execute("insert into user values(null, %s,%s,%s)",(name,phone,location,))
+    mydb.commit()
+    print("Registered Successfully!!")
+    print("----------------------------------------------------------------------------")
+
+
